@@ -1,0 +1,189 @@
+/* 
+beige: FCF8E8
+green: 94B49F
+black: #171515
+
+*/
+html{
+    height: 100%;
+}
+
+#parentBox{
+    height: auto;
+}
+body{
+    height: 100%;
+}
+
+#box{
+    animation-duration: 1s;
+    animation-name: moveUp;
+    animation-fill-mode: forwards;
+    background-color: FCF8E8;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 0px;
+    align-content: flex-start;
+}
+
+@keyframes moveUp {
+    from{
+        transform: translateY(0)
+    }
+    to{
+        transform: translateY(-15px)
+    }
+}
+
+h3{
+    font-family: 'Ubuntu', sans-serif;
+    padding: 10px;
+    color: #171515;
+}
+h5{
+    font-weight: 300;
+}
+
+#title{
+    padding-top: 20px;
+    border:  5px;
+    align-items: center;
+}
+
+#image_div{
+    align-self: flex-start;
+    align-content: center;
+    margin-top: 20px;
+}
+
+#image{
+    padding-left: 10px;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    align-self: flex-start;
+}
+
+#rowButtons{
+    margin-top: 80px;
+    padding-bottom: 20px;
+    align-self: flex-end;
+    justify-content: flex-end;
+    justify-content: space-evenly;
+    
+   
+}
+
+
+
+
+
+#buttons{
+    background-color: #171515;
+}
+
+#about_me{
+    font-family: 'Ubuntu', sans-serif;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: 300;
+}
+
+#insta {
+    width: 52px;
+    position: absolute;
+    /* visibility: hidden; */
+    
+    border-radius: 20%;
+    object-fit: cover;
+
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+    opacity: 0%;
+   
+}
+
+#insta_active{
+    width: 62px;
+
+}
+
+
+
+
+#linked{
+    width: 52px;
+
+   
+    border-radius: 50%;
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+    opacity: 0%;
+    
+    
+}
+
+#git{
+    width: 52px;
+    /* visibility: hidden; */
+    opacity: 0%;
+    border-radius: 50%;
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+    
+}
+
+
+
+
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* #box {
+    border: 8px solid;
+    border-image: repeating-linear-gradient(135deg, #FCF8E8 0 10px, #94B49F 0 20px,#171515 0 30px) 8;
+    -webkit-mask: 
+      conic-gradient(from 180deg at top 8px right 8px, #0000 90deg,#000 0)
+       var(--_i,200%) 0  /200% var(--_i,8px) border-box no-repeat,
+      conic-gradient(at bottom 8px left  8px,  #0000 90deg,#000 0)
+       0   var(--_i,200%)/var(--_i,8px) 200% border-box no-repeat,
+      linear-gradient(#000 0 0) padding-box no-repeat;
+    transition: .3s, -webkit-mask-position .3s .3s;
+    
+  }
+  #box:hover {
+    --_i: 100%;
+    color: #CC333F;
+    transition: .3s, -webkit-mask-size .3s .3s;
+  }
+   */
