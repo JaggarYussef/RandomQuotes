@@ -5,6 +5,11 @@ const app= express();
 const qRouter= require('./Routes/Authors')
 const mongoose= require('mongoose');
 const quotes= require('./Models/quotes');
+const { response } = require('express');
+const axios = require('axios');
+
+
+
 
 //kG3PlkIOGDuDotzw
 //jayay
@@ -34,29 +39,74 @@ app.use(express.json());
 
 app.get('/', async (req, res)=> {
   
-   try {
-    const fetched_quotues= await quotes.find()
-    res.json(fetched_quotues)
-   } catch (error) {
-    res.json({message: error.message})
-   }
-   // res.render('index')
+//    try {
+//     const fetched_quotues= await quotes.find()
+//     res.json(fetched_quotues)
+//    } catch (error) {
+//     res.json({message: error.message})
+//   }
+   res.render('index')
 })
 
-app.post('/', async (req, res) => {
-    const newQuote=  new quotes({
-        name: 'jaggar',
-        quote: 'he got the dawg in him',
-        picture: 'hye'
+app.get('/go', async(req, res) => {
+    // fetcher();
+     fetcher()
+     res.send('hey')
+
+
+})
+
+
+app.post('/go', async (req, res) => {
+
+
+    // for(i= 0; i < 25; i++){
+    //     fetcher()
+    //     next();
+    // }
+
+    let testArray= await fetcher();
+    
+    console.log(testArray);
+
+    // const newQuote=  new quotes({
+    //     name: 'jaggaro',
+    //     quote: 'he got the dawg in him',
+        
+    // })
+
+    // try {
+    //     //console.log('calleds FIRST TIME');
+    //     const saveQuote= await newQuote.save();
+    //     //console.log('calleds');
+    //     console.log('this is saved Quote' + saveQuote);
+    //     res.send(saveQuote)
+    // } catch (error) {
+    //     res.status(400).json({message: error.message})
+    // }
+})
+
+  async function fetcher(){
+ 
+    let qutoesArray = [];
+    
+    // for (let index = 0; index < 100; index++) {
+    //   }
+
+
+        axios.get('https://api.quotable.io/quotes').then(response  => {
+        const content = response.data.content;
+        const author = response.data.author;
+        //  console.log(response.data);
+         console.log(response.data.author);
+        // console.log(quoteObject);
+
+        qutoesArray.push({name: author, quote: content })
+
     })
-
-    try {
-        const saveQuote= await newQuote.save();
-        res.send(saveQuote)
-    } catch (error) {
-        res.status(400).json({message: error.message})
-    }
-})
+    return qutoesArray;
+   
+ }
 
 
 
