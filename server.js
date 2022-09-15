@@ -48,11 +48,12 @@ app.get('/', async (req, res)=> {
    res.render('index')
 })
 
-app.get('/go', async(req, res) => {
+app.get('/:author', async(req, res) => {
     // fetcher();
      fetcher()
      res.send('hey')
-
+    
+     
 
 })
 
@@ -60,10 +61,7 @@ app.get('/go', async(req, res) => {
 app.post('/go', async (req, res) => {
 
 
-    // for(i= 0; i < 25; i++){
-    //     fetcher()
-    //     next();
-    // }
+
 
     let testArray= await fetcher();
     
@@ -75,6 +73,11 @@ app.post('/go', async (req, res) => {
         
     // })
 
+    try {
+      quotes.insertMany(testArray)
+    } catch (error) {
+      res.json({message: error.message})
+    }
     // try {
     //     //console.log('calleds FIRST TIME');
     //     const saveQuote= await newQuote.save();
@@ -86,25 +89,26 @@ app.post('/go', async (req, res) => {
     // }
 })
 
+  //fetches quotes from api. Res gets mapped to make object of {name: item.author, content: item.content} 
+  //returns an array of quotes object
   async function fetcher(){
  
-    let qutoesArray = [];
-    
-    // for (let index = 0; index < 100; index++) {
-    //   }
-
-
-        axios.get('https://api.quotable.io/quotes').then(response  => {
-        const content = response.data.content;
-        const author = response.data.author;
-        //  console.log(response.data);
-         console.log(response.data.author);
-        // console.log(quoteObject);
-
-        qutoesArray.push({name: author, quote: content })
-
-    })
-    return qutoesArray;
+    let quotesArray = [];
+    for (let index = 1; index < 10; index++) {
+      
+      try {
+        const res = await axios.get(`https://api.quotable.io/quotes?page=${index}`)
+        const resultsArray= res.data.results;
+        resultsArray.map(item => {
+          quotesArray.push({quote: item.content, name: item.author})
+        })
+      } catch (error) {
+        console.error(error);
+        
+      }
+    }
+    //console.log(quotesArray);
+    return quotesArray;
    
  }
 
