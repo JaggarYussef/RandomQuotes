@@ -49,14 +49,29 @@ app.get('/', async (req, res)=> {
 })
 
 app.get('/:author', async(req, res) => {
-    // fetcher();
-     fetcher()
-     res.send('hey')
+   try {
+    const param= req.params.author;
+    const substring= param.substring(1) 
+    console.log(substring);
+    const quotes_of_author=  await quotes.find({name: substring}) ;
+    res.json(quotes_of_author);
+   } catch (error) {
+    res.status(404).json({message: error.message});
+   }})
     
      
 
-})
+// })
 
+app.get('/all', async(req, res) => {
+  try {
+    const jsonQuotes= await quotes.find()
+    res.json(jsonQuotes)
+  } catch (error) {
+    res.status.apply(500).json({message: error.message})
+  }
+  
+})
 
 app.post('/go', async (req, res) => {
 
@@ -113,5 +128,3 @@ app.post('/go', async (req, res) => {
  }
 
 
-
-app.use('/Authors', qRouter)
