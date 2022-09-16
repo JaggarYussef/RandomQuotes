@@ -7,7 +7,7 @@ const mongoose= require('mongoose');
 const quotes= require('./Models/quotes');
 const { response } = require('express');
 const axios = require('axios');
-
+const PORT = process.env.PORT || 3000
 
 
 
@@ -29,7 +29,9 @@ db.once('open', function() {
 })
 
 //APP CONFIGS
-app.listen(3000);
+app.listen(PORT, () => {
+  console.log(`server started on port ${PORT}`);
+});
 
 app.set('views', './views')
 app.set('view engine', 'ejs')
